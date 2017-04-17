@@ -3,18 +3,6 @@
 
 
 class Color {
-	private:
-		static const int RED_INDEX = 0;
-		static const int GREEN_INDEX = 1;
-		static const int BLUE_INDEX = 2;
-		
-		float colorArray[3];
-
-		// maps [0,1] to [0, 255]
-		sint mapToInt(float v);
-		// maps [0, 255] to [0, 1]
-		float mapToFloat(sint v);
-
 	public:
 		typedef unsigned char sint; // small int that takes values from 0 to 255
 
@@ -54,7 +42,17 @@ class Color {
 		void fvSetColor(float color[3]);
 		void ivSetColor(sint color[3]);
 
+	private:
+		static const int RED_INDEX = 0;
+		static const int GREEN_INDEX = 1;
+		static const int BLUE_INDEX = 2;
+		
+		float colorArray[3];
 
-}
+		// maps [0,1] to [0, 255]
+		sint mapToInt(float v);
+		// maps [0, 255] to [0, 1]
+		float mapToFloat(sint v);
+};
 
 #endif
