@@ -1,0 +1,66 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+ASTEROID_INCLUDED	include/Asteroid.h	2;"	d	language:C++
+Asteroid	include/Asteroid.h	/^class Asteroid : public Movable, public Drawable {$/;"	c	language:C++
+BMAX_INTENSITY	include/Color.h	/^		static byte BMAX_INTENSITY;$/;"	m	language:C++	class:Color
+BMIN_INTENSITY	include/Color.h	/^		static byte BMIN_INTENSITY;$/;"	m	language:C++	class:Color
+COLOR_INCLUDED	include/Color.h	2;"	d	language:C++
+Color	include/Color.h	/^class Color {$/;"	c	language:C++
+DRAWABLE_INCLUDED	include/Drawable.h	2;"	d	language:C++
+Drawable	include/Drawable.h	/^class Drawable {$/;"	c	language:C++
+FMAX_INTENSITY	include/Color.h	/^		static double FMAX_INTENSITY;$/;"	m	language:C++	class:Color
+FMIN_INTENSITY	include/Color.h	/^		static double FMIN_INTENSITY;$/;"	m	language:C++	class:Color
+LARGE_ASTEROID_PERCENT	include/Scene.h	/^		static const float LARGE_ASTEROID_PERCENT;$/;"	m	language:C++	class:Scene
+MATH_RADIANS	include/Vector.h	7;"	d	language:C++
+MEDIUM_ASTEROID_PERCENT	include/Scene.h	/^		static const float MEDIUM_ASTEROID_PERCENT;$/;"	m	language:C++	class:Scene
+MOVABLE_INCLUDED	include/Movable.h	2;"	d	language:C++
+Movable	include/Movable.h	/^class Movable {$/;"	c	language:C++
+PI	include/Vector.h	6;"	d	language:C++
+POINT_INCLUDED	include/Point.h	2;"	d	language:C++
+Point	include/Point.h	/^class Point {$/;"	c	language:C++
+SCENE_INCLUDED	include/Scene.h	2;"	d	language:C++
+SCENE_PAINTER_INCLUDED	include/ScenePainter.h	2;"	d	language:C++
+SMALL_ASTEROID_PERCENT	include/Scene.h	/^		static const float SMALL_ASTEROID_PERCENT;$/;"	m	language:C++	class:Scene
+Scene	include/Scene.h	/^class Scene {$/;"	c	language:C++
+ScenePainter	include/ScenePainter.h	/^class ScenePainter {$/;"	c	language:C++
+VECTOR_INCLUDED	include/Vector.h	2;"	d	language:C++
+VPATH	makefile	/^VPATH = src:include$/;"	m	language:Make
+Vector	include/Vector.h	/^class Vector {$/;"	c	language:C++
+actors	include/Scene.h	/^		std::list<Asteroid> actors;$/;"	m	language:C++	class:Scene
+animationDelay	include/Scene.h	/^		unsigned int animationDelay; \/\/in millis$/;"	m	language:C++	class:Scene
+background	include/Scene.h	/^		Color background;$/;"	m	language:C++	class:Scene
+blue	include/Color.h	/^		double blue;$/;"	m	language:C++	class:Color
+byte	include/Color.h	/^typedef unsigned char byte;$/;"	t	language:C++
+color	include/Drawable.h	/^		Color color;$/;"	m	language:C++	class:Drawable
+endPoint	include/Vector.h	/^		Point endPoint;$/;"	m	language:C++	class:Vector
+filled	include/Drawable.h	/^		bool filled;$/;"	m	language:C++	class:Drawable
+green	include/Color.h	/^		double green;$/;"	m	language:C++	class:Color
+includes	makefile	/^includes = -Iinclude$/;"	m	language:Make
+largeAsteroidRadius	include/Scene.h	/^		unsigned int largeAsteroidRadius;$/;"	m	language:C++	class:Scene
+libs	makefile	/^libs = -lGL -lGLU -lglut$/;"	m	language:Make
+lineWidth	include/Drawable.h	/^		double lineWidth;$/;"	m	language:C++	class:Drawable
+max	include/Scene.h	9;"	d	language:C++
+mediumAsteroidRadius	include/Scene.h	/^		unsigned int mediumAsteroidRadius;$/;"	m	language:C++	class:Scene
+min	include/Scene.h	8;"	d	language:C++
+override	include/Asteroid.h	/^		virtual void generateVertices() override;$/;"	m	language:C++	class:Asteroid
+override	include/Asteroid.h	/^		virtual void move() override;$/;"	m	language:C++	class:Asteroid
+painterInitialized	include/ScenePainter.h	/^		static bool painterInitialized;$/;"	m	language:C++	class:ScenePainter
+pointSize	include/Drawable.h	/^		double pointSize;$/;"	m	language:C++	class:Drawable
+position	include/Movable.h	/^		Point position;$/;"	m	language:C++	class:Movable
+prereq	makefile	/^prereq = Asteroid.h Color.h Drawable.h \\$/;"	m	language:Make
+red	include/Color.h	/^		double red;$/;"	m	language:C++	class:Color
+sceneHeight	include/Scene.h	/^		unsigned int sceneHeight;$/;"	m	language:C++	class:Scene
+sceneWidth	include/Scene.h	/^		unsigned int sceneWidth;$/;"	m	language:C++	class:Scene
+size	include/Asteroid.h	/^		float size;$/;"	m	language:C++	class:Asteroid
+smallAsteroidRadius	include/Scene.h	/^		unsigned int smallAsteroidRadius;$/;"	m	language:C++	class:Scene
+smoothPoints	include/Drawable.h	/^		bool smoothPoints;$/;"	m	language:C++	class:Drawable
+stage	include/ScenePainter.h	/^		static Scene stage;$/;"	m	language:C++	class:ScenePainter
+velocity	include/Movable.h	/^		Vector velocity;$/;"	m	language:C++	class:Movable
+vertices	include/Drawable.h	/^		std::vector<Point> vertices;$/;"	m	language:C++	class:Drawable
+x	include/Point.h	/^		float x;$/;"	m	language:C++	class:Point
+y	include/Point.h	/^		float y;$/;"	m	language:C++	class:Point
+z	include/Point.h	/^		float z;$/;"	m	language:C++	class:Point

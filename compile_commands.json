@@ -1,0 +1,47 @@
+[
+    {
+        "command": "c++ -c -Iinclude -o main src/Asteroid.cpp",
+        "directory": "/home/gabitul/Desktop/Programming/openGL/asteroids",
+        "file": "/home/gabitul/Desktop/Programming/openGL/asteroids/src/Asteroid.cpp"
+    },
+    {
+        "command": "c++ -c -Iinclude -o main src/Color.cpp",
+        "directory": "/home/gabitul/Desktop/Programming/openGL/asteroids",
+        "file": "/home/gabitul/Desktop/Programming/openGL/asteroids/src/Color.cpp"
+    },
+    {
+        "command": "c++ -c -Iinclude -o main src/Drawable.cpp",
+        "directory": "/home/gabitul/Desktop/Programming/openGL/asteroids",
+        "file": "/home/gabitul/Desktop/Programming/openGL/asteroids/src/Drawable.cpp"
+    },
+    {
+        "command": "c++ -c -Iinclude -o main src/main.cpp",
+        "directory": "/home/gabitul/Desktop/Programming/openGL/asteroids",
+        "file": "/home/gabitul/Desktop/Programming/openGL/asteroids/src/main.cpp"
+    },
+    {
+        "command": "c++ -c -Iinclude -o main src/Movable.cpp",
+        "directory": "/home/gabitul/Desktop/Programming/openGL/asteroids",
+        "file": "/home/gabitul/Desktop/Programming/openGL/asteroids/src/Movable.cpp"
+    },
+    {
+        "command": "c++ -c -Iinclude -o main src/Point.cpp",
+        "directory": "/home/gabitul/Desktop/Programming/openGL/asteroids",
+        "file": "/home/gabitul/Desktop/Programming/openGL/asteroids/src/Point.cpp"
+    },
+    {
+        "command": "c++ -c -Iinclude -o main src/Scene.cpp",
+        "directory": "/home/gabitul/Desktop/Programming/openGL/asteroids",
+        "file": "/home/gabitul/Desktop/Programming/openGL/asteroids/src/Scene.cpp"
+    },
+    {
+        "command": "c++ -c -Iinclude -o main src/ScenePainter.cpp",
+        "directory": "/home/gabitul/Desktop/Programming/openGL/asteroids",
+        "file": "/home/gabitul/Desktop/Programming/openGL/asteroids/src/ScenePainter.cpp"
+    },
+    {
+        "command": "c++ -c -Iinclude -o main src/Vector.cpp",
+        "directory": "/home/gabitul/Desktop/Programming/openGL/asteroids",
+        "file": "/home/gabitul/Desktop/Programming/openGL/asteroids/src/Vector.cpp"
+    }
+]
