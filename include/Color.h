@@ -29,8 +29,9 @@ class Color {
 					int blueVal);
 		Color(const Color& color);
 		
-		double* getRGBDoubleArray() const;
-		int* getRGBIntArray() const;
+		void setColor (double redValue, double greenValue, double blueValue);
+		void getRGBDoubleArray (double array[3]) const;
+		void getRGBIntArray (int array[3]) const;
 
 		void setRedValue(double value);
 		void setRedValue(int value);

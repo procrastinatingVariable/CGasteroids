@@ -42,22 +42,22 @@ Color::Color (const Color& color) {
 
 
 
-double* Color::getRGBDoubleArray() const {
-	double* colorArray = new double[3];
-	colorArray[0] = red;
-	colorArray[1] = green;
-	colorArray[2] = blue;
-
-	return colorArray;
+void Color::setColor (double redValue, double greenValue, double blueValue) {
+	setRedValue(redValue);
+	setGreenValue(greenValue);
+	setBlueValue(blueValue);
 }
 
-int* Color::getRGBIntArray() const {
-	int* colorArray = new int[3];
-	colorArray[0] = mapDoubleColorVal(red);
-	colorArray[1] = mapDoubleColorVal(green);
-	colorArray[2] = mapDoubleColorVal(blue);
+void Color::getRGBDoubleArray (double array[3]) const {
+	array[0] = red;
+	array[1] = green;
+	array[2] = blue;
+}
 
-	return colorArray;
+void Color::getRGBIntArray (int array[3]) const {
+	array[0] = mapDoubleColorVal(red);
+	array[1] = mapDoubleColorVal(green);
+	array[2] = mapDoubleColorVal(blue);
 }
 
 
@@ -132,6 +132,8 @@ Color& Color::operator= (const Color& color) {
 	setRedValue(color.getDRed());
 	setGreenValue(color.getDGreen());
 	setBlueValue(color.getDBlue());
+
+	return *this;
 }
 
 

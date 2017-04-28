@@ -1,45 +1,49 @@
 #include <sstream>
-#include "Movable.h"
+#include "Kinematic.h"
 
-Movable::Movable() : velocity(), position() {
+Kinematic::Kinematic() : velocity(), position() {
 }
 
-Movable::Movable (const Point& p) : velocity(), position(p) {
+Kinematic::Kinematic (const Point& p) : velocity(), position(p) {
 }
 
-Movable::Movable (const Point& p, const Vector& v) : velocity(v), position(p) {
+Kinematic::Kinematic (const Point& p, const Vector& v) : velocity(v), position(p) {
+}
+
+Kinematic::Kinematic (const Kinematic& k) : velocity(k.getVelocity()), 
+																						position(k.getPosition()) {
 }
 
 
 
-Point Movable::getPosition() const {
+Point Kinematic::getPosition() const {
 	return position;
 }
 
-void Movable::setPosition (const Point& pos) {
+void Kinematic::setPosition (const Point& pos) {
 	position = pos;
 }
 
 
-Vector Movable::getVelocity() const {
+Vector Kinematic::getVelocity() const {
 	return velocity;
 }
 
-void Movable::setVelocity (const Vector& v) {
+void Kinematic::setVelocity (const Vector& v) {
 	velocity = v;
 }
 
-float Movable::getSpeed() const {
+double Kinematic::getSpeed() const {
 	return velocity.getMagnitude();
 }
 
-void Movable::setSpeed (float speed) {
+void Kinematic::setSpeed (double speed) {
 	Vector unit = velocity.getUnitVector();
 	velocity = speed * unit;
 }
 
-void Movable::setDirection (const Point& p) {
-	float currentSpeed = getSpeed();
+void Kinematic::setDirection (const Point& p) {
+	double currentSpeed = getSpeed();
 	Vector newDirUnit(Vector(p).getUnitVector());
 
 	velocity = currentSpeed * newDirUnit;
@@ -47,7 +51,7 @@ void Movable::setDirection (const Point& p) {
 
 
 
-std::string Movable::toString() {
+std::string Kinematic::toString() {
 	std::ostringstream oString;
 
 	oString << " Velocity vector : (" 

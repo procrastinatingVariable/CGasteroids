@@ -2,11 +2,6 @@
 #include <random>
 #include "Scene.h"
 
-const float Scene::SMALL_ASTEROID_PERCENT = 0.05;
-const float Scene::MEDIUM_ASTEROID_PERCENT = 0.07;
-const float Scene::LARGE_ASTEROID_PERCENT = 0.1;
-
-
 
 
 int Scene::getRandomIntBetween (int min, int max) {
@@ -37,25 +32,13 @@ Vector Scene::getRandomVelocity (float minSpeed, float maxSpeed) {
 	return v;
 }
 
-
-
-void Scene::computeAsteroidSizes() {
-	unsigned int minDim = min(sceneWidth, sceneHeight);
-	// avoid having 0 size asteroids
-	smallAsteroidRadius = 1 + SMALL_ASTEROID_PERCENT * minDim;
-	mediumAsteroidRadius = 1 + MEDIUM_ASTEROID_PERCENT * minDim;
-	largeAsteroidRadius = 1 + LARGE_ASTEROID_PERCENT * minDim;
-}
-
-
-
 Point Scene::wrapAroundView (Point p) {
 	float pX = p.getX();
 	float pY = p.getY();
 
 	float newX, newY;
 	// offset allows the asteroids to vanish completely before they get wrapped
-	int offset = 100;
+	int offset = Asteroid::SIZE_BIG;
 
 	if (pX > getWidth() + offset) 
 		newX = 0.0 - offset;
@@ -78,14 +61,10 @@ Point Scene::wrapAroundView (Point p) {
 
 
 
-Scene::Scene() : actors(), background(){
+Scene::Scene() :asteroids(), bullets(), ship(0.0, Point(0.0, 0.0)), background() {
 	setWidth(0);
 	setHeight(0);
 	setAnimationDelay(1000 / 60); //60 fps
-
-	smallAsteroidRadius = 0;
-	mediumAsteroidRadius = 0;
-	largeAsteroidRadius = 0;
 }
 
 Scene::Scene (unsigned int width,
@@ -97,55 +76,94 @@ Scene::Scene (unsigned int width,
 	setHeight(height);
 	setAnimationDelay(animDelay);
 
-	computeAsteroidSizes();
+	ship.setPosition( Point( width/2, height/2 ));
 }
 
-Scene::Scene (const Scene& s) : actors(s.actors), 
-																background(s.background) {
+Scene::Scene (Scene& s) : asteroids(s.asteroids), 
+													bullets(s.bullets),
+													ship(s.getShip()),
+													background(s.background) {
 	setWidth(s.sceneWidth);
 	setHeight(s.sceneHeight);
 	setAnimationDelay(s.animationDelay);
-	
-	smallAsteroidRadius = s.smallAsteroidRadius;
-	mediumAsteroidRadius = s.mediumAsteroidRadius;
-	largeAsteroidRadius = s.largeAsteroidRadius;
 }
 
 
 
 void Scene::advanceAnimation() {
-	for (auto it = actors.begin(); it != actors.end(); it++) {
+	// move actors
+	for (auto it = asteroids.begin(); it != asteroids.end(); it++) {
 		it->move();
 		it->setPosition( wrapAroundView(it->getPosition()) );
+	}
+
+	for (auto it = bullets.begin(); it != bullets.end(); it++) {
+		it->move();
+		it->setPosition( wrapAroundView(it->getPosition()) );
+		if (!isInScene(it->getPosition())) {
+			auto s = it++;
+			removeBullet(s);
+		}
+	}
+
+	ship.move();
+	ship.setPosition ( wrapAroundView(ship.getPosition()) );
+
+	// check for collisions
+	for (auto ita = asteroids.begin(); ita != asteroids.end(); ita++) {
+		for (auto itb = bullets.begin(); itb != bullets.end(); itb++) {
+			if (ita->hasCollided(*itb)) {
+				auto toRemoveB = itb++;
+				removeBullet(toRemoveB);
+				
+				auto toRemoveA = ita++;
+				removeAsteroid(toRemoveA);
+				break;
+			}
+		}
+
 	}
 }
 
 
 
 void Scene::addAsteroid (const Asteroid& a) {
-	actors.push_back(a);
+	asteroids.push_back(a);
+}
+
+void Scene::removeAsteroid (std::list<Asteroid>::iterator it) {
+	if (!asteroids.empty()) 
+		asteroids.erase(it);
 }
 
 void Scene::generateAsteroids (int count) {
-	// update the sizes in case the scene dimensions changed
-	computeAsteroidSizes();
-
 	for (int i = 0; i < count; i++) {
-		int size = getRandomIntBetween (smallAsteroidRadius, largeAsteroidRadius);
-
 		int randX = getRandomIntBetween(0, sceneWidth);
 		int randY = getRandomIntBetween(0, sceneHeight);
 
-		Vector velocity = getRandomVelocity (2.0, 7.0);
-
+		Vector velocity = getRandomVelocity (ASTEROID_MIN_SPEED, ASTEROID_MAX_SPEED);
 		
+		unsigned int size = getRandomIntBetween(Asteroid::SIZE_SMALL, Asteroid::SIZE_BIG);
 		addAsteroid ( Asteroid(size, Point(randX, randY), velocity) );
-
 	}
+
 }
 
-const std::list<Asteroid>& Scene::getAsteroids() const {
-	return actors;
+
+
+void Scene::addBullet (const Bullet& b) {
+	bullets.push_back(b);
+}
+
+void Scene::removeBullet(std::list<Bullet>::iterator it) {
+	if (!bullets.empty())
+		bullets.erase(it);
+}
+
+
+
+Ship& Scene::getShip() {
+	return ship;
 }
 
 
@@ -183,10 +201,23 @@ Color Scene::getBackground() const {
 }
 
 
+bool Scene::isInScene (const Point& p) const {
+	if (p.getX() > getWidth() || p.getX() < 0) return 0;
+	if (p.getY() > getHeight() || p.getY() < 0) return 0;
 
-Scene& Scene::operator= (Scene& s) {
-	actors = s.actors;
-	sceneWidth = s.sceneWidth;
-	sceneHeight = s.sceneHeight;
-	background = s.background;
+	return 1;
 }
+
+
+
+void Scene::draw() {
+	for (auto it : asteroids) {
+		it.draw();
+	}
+	for (auto it : bullets) {
+		it.draw();
+	}
+	ship.draw();
+}
+
+

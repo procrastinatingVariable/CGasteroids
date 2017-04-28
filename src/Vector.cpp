@@ -2,13 +2,12 @@
 #include "Vector.h"
 
 Vector::Vector() : endPoint() {
-
 }
 
 Vector::Vector (const Point& e) : endPoint(e){
 }
 
-Vector::Vector (float x, float y, float z) : endPoint(x, y, z) {
+Vector::Vector (double x, double y, double z) : endPoint(x, y, z) {
 }
 
 Vector::Vector (const Vector& v) : Vector(v.getEndPoint()) {
@@ -16,27 +15,27 @@ Vector::Vector (const Vector& v) : Vector(v.getEndPoint()) {
 
 
 
-void Vector::setXComponent (float x) {
+void Vector::setXComponent (double x) {
 	endPoint.setX(x);
 }
 
-float Vector::getXComponent() const {
+double Vector::getXComponent() const {
 	return endPoint.getX();
 }
 
-void Vector::setYComponent (float y) {
+void Vector::setYComponent (double y) {
 	endPoint.setY(y);
 }
 
-float Vector::getYComponent() const {
+double Vector::getYComponent() const {
 	return endPoint.getY();
 }
 
-void Vector::setZComponent (float z) {
+void Vector::setZComponent (double z) {
 	endPoint.setZ(z);
 }
 
-float Vector::getZComponent() const {
+double Vector::getZComponent() const {
 	return endPoint.getZ();
 }
 
@@ -51,10 +50,10 @@ Point Vector::getEndPoint() const {
 }
 
 
-float Vector::getMagnitude() const {
-	float xSquare = std::pow(endPoint.getX(), 2);
-	float ySquare = std::pow(endPoint.getY(), 2);
-	float zSquare = std::pow(endPoint.getZ(), 2);
+double Vector::getMagnitude() const {
+	double xSquare = std::pow(endPoint.getX(), 2);
+	double ySquare = std::pow(endPoint.getY(), 2);
+	double zSquare = std::pow(endPoint.getZ(), 2);
 
 	return std::sqrt(xSquare + ySquare + zSquare);
 }
@@ -68,37 +67,37 @@ Vector& Vector::operator= (const Vector& v) {
 }
 
 Vector operator+ (const Vector& a, const Vector& b) {
-	float aX = a.getEndPoint().getX();
-	float aY = a.getEndPoint().getY();
-	float aZ = a.getEndPoint().getZ();
+	double aX = a.getEndPoint().getX();
+	double aY = a.getEndPoint().getY();
+	double aZ = a.getEndPoint().getZ();
 
-	float bX = b.getEndPoint().getX();
-	float bY = b.getEndPoint().getY();
-	float bZ = b.getEndPoint().getZ();
+	double bX = b.getEndPoint().getX();
+	double bY = b.getEndPoint().getY();
+	double bZ = b.getEndPoint().getZ();
 
 	return Vector(Point(aX + bX, aY + bY, aZ + bZ));
 }
 
-Vector operator* (float scalar, const Vector& a) {
-	float newX = a.getEndPoint().getX() * scalar;
-	float newY = a.getEndPoint().getY() * scalar;
-	float newZ = a.getEndPoint().getZ() * scalar;
+Vector operator* (double scalar, const Vector& a) {
+	double newX = a.getEndPoint().getX() * scalar;
+	double newY = a.getEndPoint().getY() * scalar;
+	double newZ = a.getEndPoint().getZ() * scalar;
 
 	return Vector(Point(newX, newY, newZ));
 }
 
 Vector Vector::crossProduct (const Vector& v) {
-	float x1 = endPoint.getX();
-	float y1 = endPoint.getY();
-	float z1 = endPoint.getZ();
+	double x1 = endPoint.getX();
+	double y1 = endPoint.getY();
+	double z1 = endPoint.getZ();
 
-	float x2 = v.endPoint.getX();
-	float y2 = v.endPoint.getY();
-	float z2 = v.endPoint.getZ();
+	double x2 = v.endPoint.getX();
+	double y2 = v.endPoint.getY();
+	double z2 = v.endPoint.getZ();
 
-	float newX = y1 * z2 - y2 * z1;
-	float newY = - (x1 * z2 - x2 * z1);
-	float newZ = x1 * y2 - x2 * y1;
+	double newX = y1 * z2 - y2 * z1;
+	double newY = - (x1 * z2 - x2 * z1);
+	double newZ = x1 * y2 - x2 * y1;
 
 	return Vector(Point(newX, newY, newZ));
 }
@@ -106,24 +105,26 @@ Vector Vector::crossProduct (const Vector& v) {
 
 
 Vector Vector::getUnitVector() const {
-	float thisMagnitude = getMagnitude();
+	double thisMagnitude = getMagnitude();
 	if (thisMagnitude != 0) {
 		Vector unit((1/getMagnitude()) * *this);
 		return unit;
 	}
+	// return empty vector if magnitude is 0
 	return Vector();
 }
 
 
 
-Vector Vector::rotate2D (float angle) {
-	float cosAngle = std::cos(angle);
-	float sinAngle = std::sin(angle);
+Vector Vector::rotate2D (double angle) {
+	angle = MATH_RADIANS(angle);
+	double cosAngle = std::cos(angle);
+	double sinAngle = std::sin(angle);
 	
-	float currentX = endPoint.getX();
-	float currentY = endPoint.getY();
-	float newX = currentX * cosAngle - currentY * sinAngle;
-	float newY = currentX * sinAngle + currentY * cosAngle;
+	double currentX = endPoint.getX();
+	double currentY = endPoint.getY();
+	double newX = currentX * cosAngle - currentY * sinAngle;
+	double newY = currentX * sinAngle + currentY * cosAngle;
 
 	endPoint.setX(newX);
 	endPoint.setY(newY);

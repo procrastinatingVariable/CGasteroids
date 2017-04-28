@@ -4,26 +4,23 @@
 #include <list>
 #include "Asteroid.h"
 #include "Color.h"
+#include "Drawable.h"
+#include "Ship.h"
+#include "Bullet.h"
 
 #define min(a,b) a < b ? a : b
 #define max(a,b) a > b ? a : b
 
-class Scene {
+class Scene : public Drawable{
 	private:
-		static const float SMALL_ASTEROID_PERCENT;
-		static const float MEDIUM_ASTEROID_PERCENT;
-		static const float LARGE_ASTEROID_PERCENT;
-
-		std::list<Asteroid> actors;
+		std::list<Asteroid> asteroids;
+		std::list<Bullet> bullets;
+		Ship ship;
 
 		unsigned int sceneWidth;
 		unsigned int sceneHeight;
 
 		unsigned int animationDelay; //in millis
-
-		unsigned int smallAsteroidRadius;
-		unsigned int mediumAsteroidRadius;
-		unsigned int largeAsteroidRadius;
 
 		Color background;
 
@@ -31,10 +28,7 @@ class Scene {
 		float getRandomFloatBetween (float min, float max);
 		Vector getRandomVelocity (float minSpeed, float maxSpeed);
 
-		void computeAsteroidSizes();
-
 		Point wrapAroundView (Point p);
-
 
 	public:
 		Scene();
@@ -42,13 +36,18 @@ class Scene {
 					 unsigned int height,
 					 unsigned int animDelay,
 					 Color bkg);
-		Scene (const Scene& s);
+		Scene (Scene& s);
 
 		void advanceAnimation();
 
 		void addAsteroid(const Asteroid& a);
+		void removeAsteroid(std::list<Asteroid>::iterator it);
 		void generateAsteroids (int count);
-		const std::list<Asteroid>& getAsteroids() const;
+
+		void addBullet (const Bullet& b);
+		void removeBullet (std::list<Bullet>::iterator it);
+
+		Ship& getShip();
 
 		void setWidth (unsigned int width);
 		unsigned int getWidth() const;
@@ -62,8 +61,9 @@ class Scene {
 		void setBackground (Color c);
 		Color getBackground() const;
 
-		Scene& operator= (Scene& s);
+		bool isInScene (const Point& p) const;
 
+		virtual void draw() override;
 
 };
 

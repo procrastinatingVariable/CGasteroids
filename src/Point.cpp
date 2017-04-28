@@ -1,12 +1,33 @@
+#include <cmath>
 #include "Point.h"
 
-Point::Point() {
-	x = 0;
-	y = 0;
-	z = 0;
+
+
+double Point::distance (const Point& a, const Point& b) {
+	double aX = a.getX();
+	double aY = a.getY();
+	double aZ = a.getZ();
+
+	double bX = b.getX();
+	double bY = b.getY();
+	double bZ = b.getZ();
+
+	return std::sqrt( std::pow(bX - aX, 2) + 
+										std::pow(bY - aY, 2) +
+										std::pow(bZ - aZ, 2) );
 }
 
-Point::Point (float x, float y, float z) {
+
+
+
+
+Point::Point() {
+	x = 0.0;
+	y = 0.0;
+	z = 0.0;
+}
+
+Point::Point (double x, double y, double z) {
 	this->x = x;
 	this->y = y;
 	this->z = z;
@@ -20,52 +41,46 @@ Point::Point (const Point& p) {
 
 
 
-float* Point::get2DPointArray() const {
-	float* a = new float[2];
-	a[0] = x;
-	a[1] = y;
-
-	return a;
+void Point::get2DPointArray (double array[2]) const {
+	array[0] = getX();
+	array[1] = getY();
 }
 
-float* Point::get3DPointArray() const {
-	float* a = new float[3];
-	a[0] = x;
-	a[1] = y;
-	a[2] = z;
-
-	return a;
+void Point::get3DPointArray (double array[3]) const {
+	array[0] = getX();
+	array[1] = getY();
+	array[2] = getZ();
 }
 
 
 
-void Point::setX (float value) {
+void Point::setX (double value) {
 	x = value;
 }
 
-float Point::getX() const {
+double Point::getX() const {
 	return x;
 }
 
-void Point::setY (float value) {
+void Point::setY (double value) {
 	y = value;
 }
 
-float Point::getY() const {
+double Point::getY() const {
 	return y;
 }
 
-void Point::setZ (float value) {
+void Point::setZ (double value) {
 	z = value;
 }
 
-float Point::getZ() const {
+double Point::getZ() const {
 	return z;
 }
 
 
 
-void Point::scale (float value) {
+void Point::scale (double value) {
 	x *= value;
 	y *= value;
 	z *= value;
@@ -73,13 +88,18 @@ void Point::scale (float value) {
 
 
 Point& Point::operator= (const Point& p) {
-	x = p.x;
-	y = p.y;
-	z = p.z;
+	setX(p.x);
+	setY(p.y);
+	setZ(p.z);
 
 	return *this;
 }
 
-Point operator* (float c, const Point& p) {
-	return Point (c * p.x, c * p.y, c * p.z);
+Point operator* (double c, const Point& p) {
+	double x = c * p.getX();
+	double y = c * p.getY();
+	double z = c * p.getZ();
+
+	return Point(x, y, z);
 }
+

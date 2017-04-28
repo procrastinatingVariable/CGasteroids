@@ -4,15 +4,16 @@
 #include <string>
 #include "Vector.h"
 
-class Movable {
+class Kinematic {
 	private:
 		Vector velocity;
 		Point position;
 		
 	public:
-		Movable();
-		Movable (const Point& p);
-		Movable (const Point& p, const Vector& v);
+		Kinematic();
+		Kinematic (const Point& p);
+		Kinematic (const Point& p, const Vector& v);
+		Kinematic (const Kinematic& k);
 
 		Point getPosition() const;
 		void setPosition (const Point& pos);
@@ -20,9 +21,9 @@ class Movable {
 		Vector getVelocity() const;
 		void setVelocity (const Vector& v);
 
-		float getSpeed() const;
+		double getSpeed() const;
 		// changes the magnitued of the velocity vector
-		void setSpeed (float speed);
+		void setSpeed (double speed);
 		// keeps the speed constant, but changes the direction as to point to p
 		void setDirection (const Point& p);
 

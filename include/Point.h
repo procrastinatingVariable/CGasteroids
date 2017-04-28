@@ -3,32 +3,33 @@
 
 class Point {
 	private:
-		float x;
-		float y;
-		float z;
+		double x;
+		double y;
+		double z;
 		
 	public:
 		Point();
-		Point(float x, float y, float z = 0.0);
+		Point(double x, double y, double z = 0.0);
 		Point(const Point& p);
 
-		float* get2DPointArray() const;
-		float* get3DPointArray() const;
+		void get2DPointArray (double array[2]) const;
+		void get3DPointArray (double array[3]) const;
 
-		void setX(float value);
-		float getX() const;
+		void setX(double value);
+		double getX() const;
 
-		void setY(float value);
-		float getY() const;
+		void setY(double value);
+		double getY() const;
 
-		void setZ(float value);
-		float getZ() const;
+		void setZ(double value);
+		double getZ() const;
 
-		void scale (float value);
+		void scale (double value);
 
 		Point& operator=(const Point& p);
-		friend Point operator* (float c, const Point& p);
+		friend Point operator* (double c, const Point& p);
 
+		static double distance(const Point& a, const Point& b);
 
 };
 
