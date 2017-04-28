@@ -1,6 +1,8 @@
 ASTEROIDS CLONE
 ===============
 
+![Screenshot](http://i.imgur.com/nCP2MVK.png)
+
 
 Feature Specification
 ---------------------
