@@ -23,17 +23,17 @@ Feature Specification
 Scenario
 --------
 The game start **immediately**. A **random** number of **asteroids** 
-will be **generated** with **different valocities**. They will **move** in
+will be **generated** with **different velocities**. They will **move** in
 a **straight line** until they get **destroyed** by **colliding** with a 
 **projectile**.
 	
 The player starts off **in the middle** of the scene as a **triangle** 
-shapped ship. The **left arrow key** will rotate the ship **counterclockwise**,
+shaped ship. The **left arrow key** will rotate the ship **counterclockwise**,
 while the **right arrow key** will rotate it **clockwise**. Pressing the 
 **up arrow key** will make the ship **accelerate** at a **steady pace**
 until it reaches its **max velocity**. Pressing the **down arrow key** will
-**stop** the acceleration, making the ship **drecrease** its speed at a steady
-rate, untill it reaches a **minimum** speed.
+**stop** the acceleration, making the ship **decrease** its speed at a steady
+rate, until it reaches a **minimum** speed.
 
 When either an **asteroid** or the **player** pass the **edge** of the 
 **scene**, they will **loop around** on the **diametrically opposite** side
@@ -81,12 +81,12 @@ asteroids and projectiles : **Kinematic**, **Drawable** and **Polygon**
 	with other objects. It does that by checking if the **center** of the **object**
 	is closer to the **center of the asteroid** than the **asteroid's radius**.
 
-* The **Scene** class is where all the physics and game logic are processsed. It
+* The **Scene** class is where all the physics and game logic are processed. It
 implements an *advanceScene* method that determines the positions and collisions
 between the actors.
 
 * The **game logic** and **physics** are independent from the **graphics**
-(they **don't** depend on the framerate). This is achieved by using *glIdleFunc*,
+(they **don't** depend on the frame rate). This is achieved by using *glIdleFunc*,
 where the **scene's** *advanceScene()* method is called. The **scene** is drawn
 in the display function where its *draw()* method is called.
 

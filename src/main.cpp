@@ -52,7 +52,6 @@ void control2 (unsigned char key, int x, int y) {
 
 void clock(int value) {
 	game.advanceAnimation();
-	std::cout << game.getShip().getSpeed() << std::endl;
 	glutPostRedisplay();
 	glutTimerFunc(game.getAnimationDelay(), clock, 0);
 }
