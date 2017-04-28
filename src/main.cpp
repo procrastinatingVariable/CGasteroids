@@ -14,6 +14,38 @@ using namespace std;
 
 Scene game(600, 600, 1000/60, Color());
 
+void drawCRTEffect() {
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	glLineWidth(3);
+
+	int sceneHeight = game.getHeight();
+	int sceneWidth = game.getWidth();
+	int lineY;
+
+	glColor4f(0.22, 0.26, 0.31, 0.4);
+
+	glBegin(GL_LINES);
+
+		for (int i = 0; i < sceneHeight; i+= 6) {
+
+			if ( (i/6) % 2 == 0) 
+				lineY = i - 3;
+			else 
+				lineY = i;
+
+			glVertex2f(0.0, lineY);
+			glVertex2f(sceneWidth, lineY);
+			
+		}
+
+	glEnd();
+
+	glDisable(GL_BLEND);
+}
+
+
 void control(int key, int x, int y) {
 	static Ship& mainShip = game.getShip();
 
@@ -62,7 +94,9 @@ void draw() {
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	game.draw();
+	drawCRTEffect();
 
+	glutSwapBuffers();
 	glFlush();
 }
 
@@ -74,7 +108,7 @@ int main(int nargs, char* args[]) {
 	glutInit(&nargs, args);
 	glutInitWindowSize(500, 500);
 	glutInitWindowPosition(100, 100);
-	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_ALPHA);
 	glutCreateWindow("test");
 
 	glMatrixMode(GL_PROJECTION);
